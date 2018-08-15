@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+<header>
+    <h1 class="logo"><a href="javascript:;"><img src="images/player_logo.png"></a></h1>
+    <div class="login-box">
+        <a class="login" href="javascript:;">登录</a>
+        <a class="setting" href="javascript:;">设置</a>
+    </div>
+</header>
+<section class="content">
+    <div class="center">
+        <div class="content-left">
+            <div class="tool-bar">
+                <ul>
+                    <li><a href="javascript:;"><i></i>收藏</a></li>
+                    <li><a href="javascript:;"><i></i>添加到</a></li>
+                    <li><a href="javascript:;"><i></i>下载</a></li>
+                    <li><a href="javascript:;"><i></i>删除</a></li>
+                    <li><a href="javascript:;"><i></i>清空列表</a></li>
+                </ul>
+            </div>
+            <div class="music-box">
+                <div class="music-content">
+                    <ul class="music-list">
+                        <li class="music-list-header">
+                            <div class="checkbox"><span></span></div>
+                            <div class="index"><a>0</a></div>
+                            <div class="title">
+                                <div class="title-text"><a title="">歌曲</a></div>
+                                <div class="title-control">
+                                    <a href="javascript:;" title="播放"></a>
+                                    <a href="javascript:;" title="添加到歌单"></a>
+                                    <a href="javascript:;" title="下载"></a>
+                                    <a href="javascript:;" title="分享"></a>
+                                </div>
+                            </div>
+                            <div class="singer"><a href="javascript:;" title="">歌手</a></div>
+                            <div class="duration">
+                                <a>时长</a>
+                                <a href="javascript:;" title="删除"></a>
+                            </div>
+                        </li>
+                        <!--waiting for append new node-->
+                    </ul>
+                </div>
+                <div class="scroll"></div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="music-img">
+                <img src="" alt="">
+            </div>
+            <div class="music-info">
+                <p>歌曲名<a href="javascript:;" title=""></a></p>
+                <p>歌手名<a href="javascript:;" title=""></a></p>
+                <p>专辑名<a href="javascript:;" title=""></a></p>
+            </div>
+            <div class="lyric-box">
+                <p>我已经爱上你 - 九局</p>
+                <p>词：年羊翻译</p>
+                <p>曲：年羊翻译</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="center">
+        <div class="control-btn">
+            <a href="javascript:;" title="alt+←"></a>
+            <a href="javascript:;" title="空格"></a>
+            <a href="javascript:;" title="alt+→"></a>
+        </div>
+        <div class="player">
+            <div class="player-info">
+                <a href="javascript:;">我已经爱上你</a>
+                <a href="javascript:;">九局</a>
+                <span class="time"></span>
+            </div>
+            <div class="progress">
+                <span class="progress-bg"></span>
+                <span class="progress-bar"></span>
+            </div>
+            <div class="player-tools">
+                <span class="cyclic">
+                    <a href="javascript:;" title="列表循环[O]"></a>
+                    <a href="javascript:;" title="顺序播放[O]"></a>
+                    <a href="javascript:;" title="随机播放[O]"></a>
+                    <a href="javascript:;" title="单曲循环[O]"></a>
+                </span>
+                <span class="favorite">
+                    <a href="javascript:;" title="喜欢[V]"></a>
+                    <a href="javascript:;" title="取消喜欢[V]"></a>
+                </span>
+                <span class="download">
+                    <a href="javascript:;" title="下载[D]"></a>
+                </span>
+                <span class="comment">
+                    <a href="javascript:;" title="评论">
+                        <span class="comment-num"></span>
+                    </a>
+                </span>
+                <span class="only">
+                    <a href="javascript:;" title="打开纯净模式[C]"></a>
+                    <a href="javascript:;" title="关闭纯净模式[C]"></a>
+                </span>
+            </div>
+            <div class="volume">
+                <span class="volume-icon"></span>
+                <div class="progress">
+                    <span class="progress-bg"></span>
+                    <span class="progress-bar"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
