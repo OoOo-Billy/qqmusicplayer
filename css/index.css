@@ -141,6 +141,7 @@ header .login-box a{
     width: 100%;
     height: 50px;
     line-height: 50px;
+    padding-right: 100px;
     border-bottom: 1px solid rgba(255,255,255,.02);
 }
 .music-list>li>div{
@@ -149,6 +150,7 @@ header .login-box a{
 .music-list>li>.checkbox{
     padding-right: 20px;
 }
+
 .music-list>li>.checkbox span{
     display: inline-block;
     vertical-align: -3px;
@@ -156,39 +158,119 @@ header .login-box a{
     height: 14px;
     border: 1px solid rgba(255,255,255,.2);
 }
+.music-list>li>.checkbox span:hover{
+    border: 1px solid rgba(255,255,255,1);
+}
+.music-list>li>.checked span{
+    border: 1px solid rgba(255,255,255,1);
+    background: url("../images/icon_sprite.png") no-repeat -60px -80px;
+}
+
 .music-list>li>.index{
     width: 20px;
     padding-right: 10px;
     text-align: right;
+    cursor: default;
+}
+.music-list>li>.index a{
+    color: rgba(225,225,225,.8);
 }
 .music-list>li>.title{
     width: 355px;
+    height: 100%;
 }
+
 .music-list>li>.title>.title-text{
     display: inline-block;
 }
+.music-list>li>.title>.title-text a{
+    cursor: default;
+    color: rgba(225,225,225,.8);
+}
+.music-list>li>.title>.title-text a{
+
+}
 .music-list>li>.title>.title-control{
     float: right;
+    background-color: skyblue;
+    height: 100%;
+    display: none;
 }
 .music-list>li>.title>.title-control a{
     display: inline-block;
     width: 36px;
     height: 36px;
-    background: url("../images/icon_list_menu.png") no-repeat 0 0;
+    margin-right: 5px;
+    margin-top: 7px;
+    background: url("../images/icon_list_menu.png") no-repeat -80px 0;
 }
-.music-list>li>.singer{
-    padding-left: 30px;
+.music-list>li>.title>.title-control a:hover{
+    background-position: -120px 0;
 }
-.music-list>li>.duration{
-    float: right;
-}
-
 .music-list>.music-list-header>.index{
     display: none;
 }
 .music-list>.music-list-header>.title{
     padding-left: 30px;
 }
+.music-list>.music-list-header a{
+    color: rgba(225,225,225,.8);
+    cursor: default;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(2){
+    background-position: -80px -80px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(2):hover{
+    background-position:-120px -80px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(3){
+    background-position: -80px -120px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(3):hover{
+    background-position: -120px -120px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(4){
+    background-position: -80px -40px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(4):hover{
+    background-position: -120px -40px;
+}
+
+.music-list>li>.singer{
+    padding-left: 30px;
+}
+.music-list>li>.duration{
+    float: right;
+    height: 100%;
+}
+.music-list .music-hover{
+
+}
+.music-list>.music-list-header>.index{
+    display: none;
+}
+.music-list>.music-list-header>.title{
+    padding-left: 30px;
+}
+.music-list>.music-hover .title .title-control{
+    display: block;
+}
+.music-list>.music-hover .duration .duration-time{
+    display: none;
+}
+.music-list>.music-hover .duration .duration-btn{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url("../images/icon_list_menu.png") no-repeat -80px -160px;
+    margin-top: 7px;
+}
+
+.music-list>.music-hover .duration .duration-btn:hover{
+    background-position: -120px -160px;
+}
+
+
 
 .content .content-right{
 
