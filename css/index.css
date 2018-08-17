@@ -202,10 +202,10 @@ header .login-box a{
     height: 36px;
     margin-right: 5px;
     margin-top: 7px;
-    background: url("../images/icon_list_menu.png") no-repeat -80px 0;
+    background: url("../images/icon_list_menu.png") no-repeat -80px -200px;
 }
 .music-list>li>.title>.title-control a:hover{
-    background-position: -120px 0;
+    background-position: -120px -200px;
 }
 .music-list>.music-list-header>.index{
     display: none;
@@ -217,22 +217,31 @@ header .login-box a{
     color: rgba(225,225,225,.8);
     cursor: default;
 }
+.music-list>.music-list-content>.title>.title-control .stop{
+    display: none;
+}
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(2){
-    background-position: -80px -80px;
+    background-position: -80px 0;
 }
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(2):hover{
-    background-position:-120px -80px;
+    background-position: -120px 0;
 }
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(3){
-    background-position: -80px -120px;
+    background-position: -80px -80px;
 }
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(3):hover{
-    background-position: -120px -120px;
+    background-position:-120px -80px;
 }
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(4){
-    background-position: -80px -40px;
+    background-position: -80px -120px;
 }
 .music-list>.music-list-content>.title>.title-control a:nth-of-type(4):hover{
+    background-position: -120px -120px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(5){
+    background-position: -80px -40px;
+}
+.music-list>.music-list-content>.title>.title-control a:nth-of-type(5):hover{
     background-position: -120px -40px;
 }
 
@@ -258,7 +267,7 @@ header .login-box a{
 .music-list>.music-hover .duration .duration-time{
     display: none;
 }
-.music-list>.music-hover .duration .duration-btn{
+.music-list>.music-hover .duration .del{
     display: inline-block;
     width: 36px;
     height: 36px;
@@ -266,7 +275,7 @@ header .login-box a{
     margin-top: 7px;
 }
 
-.music-list>.music-hover .duration .duration-btn:hover{
+.music-list>.music-hover .duration .del:hover{
     background-position: -120px -160px;
 }
 
