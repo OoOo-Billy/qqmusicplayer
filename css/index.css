@@ -129,7 +129,10 @@ header .login-box a{
     border: 1px solid rgba(255,255,255,1);
 }
 .content .content-left .music-box{
-    width: 100%;
+    width: 640px;
+    height: 300px;
+    overflow: auto ;
+    padding-right: 50px;
 }
 .content .content-left .music-content{
 
@@ -141,7 +144,6 @@ header .login-box a{
     width: 100%;
     height: 50px;
     line-height: 50px;
-    padding-right: 100px;
     border-bottom: 1px solid rgba(255,255,255,.02);
 }
 .music-list>li>div{
