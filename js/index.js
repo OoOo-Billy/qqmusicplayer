@@ -1,10 +1,16 @@
 $(function () {
 //    0.定义全局变量/初始化相关参数
-//    全局变量
+//    0.1全局变量
     let $audio = $('audio');
     let player = new Player($audio);
-//    初始化滚动条
+//    0.2初始化滚动条
     $(".music-box").mCustomScrollbar();
+//    0.3初始化音乐列表高度
+    initMusicBox();
+    function initMusicBox(){
+        let $height = $(window).height();
+        $('.music-box').css('height',$height - 250);
+    }
 
 //    1.动态添加歌曲列表
     getPlayerList();
@@ -33,16 +39,17 @@ $(function () {
 
 
 //    2.监听歌曲列表鼠标移入移出事件
-    $('.music-list').delegate('.music-list-content','mouseenter',function () {
+    let $musicList = $('.music-list');
+    $musicList.delegate('.music-list-content','mouseenter',function () {
         $(this).addClass('music-hover');
     });
-    $('.music-list').delegate('.music-list-content','mouseleave',function () {
+    $musicList.delegate('.music-list-content','mouseleave',function () {
         $(this).removeClass('music-hover');
     });
 
 //    3.监听复选框点击事件
 //    3.1标题栏复选框，点击全选
-    $('.music-list').delegate('.music-list-header>.checkbox>span','click',function () {
+    $musicList.delegate('.music-list-header>.checkbox>span','click',function () {
         $(this).parent('.checkbox').toggleClass('checked');
         if ($(this).parent('.checkbox').hasClass('checked')){
             $('.checkbox').addClass('checked');
@@ -51,29 +58,29 @@ $(function () {
         }
     });
 //    3.2其他复选框，点击选择
-    $('.music-list').delegate('.music-list-content>.checkbox>span','click',function () {
+    $musicList.delegate('.music-list-content>.checkbox>span','click',function () {
         $(this).parent('.checkbox').toggleClass('checked');
         $('.music-list-header>.checkbox').removeClass('checked');
     });
 
 //    4.监听歌曲列表子菜单按钮事件
 //    4.1播放按钮事件
-    $('.music-list').delegate('.play','click',function () {
-        $(this).hide();
-        $(this).siblings('.stop').css('display','inline-block');//直接使用show会是display值为inline,所以使用css
+    $musicList.delegate('.play','click',function () {
+        $(this).parents('.music-list-content').toggleClass('music-play');
+        $(this).parents('.music-list-content').siblings().removeClass('music-play');
+
     });
 //    4.2暂停按钮事件
-    $('.music-list').delegate('.stop','click',function () {
-        $(this).hide();
-        $(this).siblings('.play').show();
+    $musicList.delegate('.stop','click',function () {
+        $(this).parents('.music-list-content').toggleClass('music-play');
+
     });
 
 //    5.监听删除按钮点击事件
-    $('.music-list').delegate('.del','click',function () {
+    $musicList.delegate('.del','click',function () {
         //5.1删除歌曲
         $(this).parents('.music-list-content').remove();
     //    5.2更改剩余歌曲序号
-
     });
 
     /**
@@ -85,7 +92,10 @@ $(function () {
     function crateMusicItem(index,ele) {
         let $music = $(`<li class="music-list-content">
                             <div class="checkbox"><span></span></div>
-                            <div class="index"><a>${index + 1}</a></div>
+                            <div class="index">
+                                <a>${index + 1}</a>
+                                <span class="index-play"></span>
+                            </div>
                             <div class="title">
                                 <div class="title-text"><a title="${ele.name}">${ele.name}</a></div>
                                 <div class="title-control">
@@ -108,9 +118,10 @@ $(function () {
         $music.get(0).music = ele;
         return $music;
     }
-});
-
 
     function initMusicInfo(ele) {
 
     }
+});
+
+

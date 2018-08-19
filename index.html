@@ -20,6 +20,7 @@
 </header>
 <section class="content">
     <div class="center">
+        <!--左边布局-->
         <div class="content-left">
             <div class="tool-bar">
                 <ul>
@@ -52,19 +53,25 @@
                 <!--<div class="scroll"></div>-->
             </div>
         </div>
+
+        <!--右边布局-->
         <div class="content-right">
             <div class="music-img">
-                <img src="" alt="">
+                <img src="source/告白气球.jpg">
             </div>
             <div class="music-info">
-                <p>歌曲名<a href="javascript:;" title=""></a></p>
-                <p>歌手名<a href="javascript:;" title=""></a></p>
-                <p>专辑名<a href="javascript:;" title=""></a></p>
+                <p>歌曲名：<a href="javascript:;" title="">告白气球</a></p>
+                <p>歌手名：<a href="javascript:;" title="">周杰伦</a></p>
+                <p>专辑名：<a href="javascript:;" title="">周杰伦的床边故事</a></p>
             </div>
             <div class="lyric-box">
                 <p>我已经爱上你 - 九局</p>
                 <p>词：年羊翻译</p>
                 <p>曲：年羊翻译</p>
+                <p>我已经爱上你</p>
+                <p>渴望能在一起</p>
+                <p>可是我们的茶具</p>
+                <p>有很大的距离</p>
             </div>
         </div>
     </div>
@@ -72,54 +79,59 @@
 <footer>
     <div class="center">
         <div class="control-btn">
-            <a href="javascript:;" title="alt+←"></a>
-            <a href="javascript:;" title="空格"></a>
-            <a href="javascript:;" title="alt+→"></a>
+            <a class="bg" href="javascript:;" title="alt+←"></a>
+            <a class="bg" href="javascript:;" title="[空格]"></a>
+            <a class="bg" href="javascript:;" title="[空格]"></a>
+            <a class="bg" href="javascript:;" title="alt+→"></a>
         </div>
         <div class="player">
             <div class="player-info">
-                <a href="javascript:;">我已经爱上你</a>
-                <a href="javascript:;">九局</a>
-                <span class="time"></span>
+                <span class="info">
+                    <a href="javascript:;">我已经爱上你</a>
+                    -
+                    <a href="javascript:;">九局</a>
+                </span>
+                <span class="time">00:04 / 04:02</span>
             </div>
             <div class="progress">
                 <span class="progress-bg"></span>
-                <span class="progress-bar"></span>
+                <span class="progress-bar bg"></span>
             </div>
-            <div class="player-tools">
-                <span class="cyclic">
-                    <a href="javascript:;" title="列表循环[O]"></a>
-                    <a href="javascript:;" title="顺序播放[O]"></a>
-                    <a href="javascript:;" title="随机播放[O]"></a>
-                    <a href="javascript:;" title="单曲循环[O]"></a>
-                </span>
-                <span class="favorite">
-                    <a href="javascript:;" title="喜欢[V]"></a>
-                    <a href="javascript:;" title="取消喜欢[V]"></a>
-                </span>
-                <span class="download">
-                    <a href="javascript:;" title="下载[D]"></a>
-                </span>
-                <span class="comment">
-                    <a href="javascript:;" title="评论">
-                        <span class="comment-num"></span>
+        </div>
+        <div class="player-tools">
+            <span class="cyclic">
+                <a class="on bg" href="javascript:;" title="列表循环[O]"></a>
+                <a class="bg" href="javascript:;" title="顺序播放[O]"></a>
+                <a class="bg" href="javascript:;" title="随机播放[O]"></a>
+                <a class="bg" href="javascript:;" title="单曲循环[O]"></a>
+            </span>
+            <span class="favorite">
+                    <a class="on bg" href="javascript:;" title="喜欢[V]"></a>
+                    <a class="bg" href="javascript:;" title="取消喜欢[V]"></a>
+            </span>
+            <span class="download">
+                    <a class="bg" href="javascript:;" title="下载[D]"></a>
+            </span>
+            <span class="comment">
+                    <a class="bg" href="javascript:;" title="评论">
+                        <i class="comment-num">999+</i>
                     </a>
-                </span>
-                <span class="only">
-                    <a href="javascript:;" title="打开纯净模式[C]"></a>
-                    <a href="javascript:;" title="关闭纯净模式[C]"></a>
-                </span>
-            </div>
-            <div class="volume">
-                <span class="volume-icon"></span>
-                <div class="progress">
-                    <span class="progress-bg"></span>
-                    <span class="progress-bar"></span>
-                </div>
+            </span>
+            <span class="only">
+                    <a class="on bg" href="javascript:;" title="打开纯净模式[C]"></a>
+                    <a class="bg" href="javascript:;" title="关闭纯净模式[C]"></a>
+            </span>
+        </div>
+        <div class="volume">
+            <span class="volume-icon bg"></span>
+            <div class="progress">
+                <span class="progress-bg"></span>
+                <span class="progress-bar bg"></span>
             </div>
         </div>
     </div>
 </footer>
+
 <div class="mask_bg"></div>
 <div class="mask"></div>
 <audio src=""></audio>
