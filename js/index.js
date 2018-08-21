@@ -99,19 +99,38 @@ $(function () {
 
         //    4.监听删除按钮点击事件
         $musicList.delegate('.del', 'click', function () {
+            let $farther = $(this).parents('.music-list-content');
+            //判断是否是正在播放的歌曲
+            if ($farther.get(0).index === player.playingIndex){
+                $('.next').trigger('click');
+            }
             //4.1删除歌曲
-            $(this).parents('.music-list-content').remove();
-            //4.2更改剩余歌曲序号
+            $farther.remove();
+            //4.2删除歌曲在播放器中的数据
+            player.changeMusic($farther.get(0).index);
+
+            //4.3重新给音乐列表排序
+            $('.music-list-content').each(function (index, ele) {
+                ele.index = index;
+                $(ele).find('.index a').text(index + 1);
+            });
         });
 
         //    5.监听播放器中*播放*按钮的点击事件
         $('.play').click(function () {
-            //6.1播放器播放音乐;
-            player.audio.play();
-            //6.2切换按钮
+            let $item = $('.music-list-content');
+            //5.1判断是否播放过音乐
+            if (player.playingIndex === -1) {
+                //从未播放过，默认播放第一首音乐
+                player.playMusic($item.get(0).index, $item.get(0).music);
+            } else {
+                //已经播放过，继续播放播放器中的音乐;
+                player.audio.play();
+            }
+            //5.2切换按钮
             $controlBtn.addClass('playing');
-            //6.3同步音乐列表中当前音乐的暂停按钮
-            $('.music-list-content').eq(player.playingIndex).addClass('music-play');
+            //5.3同步音乐列表中当前音乐的暂停按钮
+            $item.eq(player.playingIndex).addClass('music-play');
         });
 
         //    6.监听播放器中*暂停*按钮的点击事件
@@ -126,19 +145,34 @@ $(function () {
 
         //    7.监听播放器中*上一首*按钮的点击事件
         $('.pre').click(function () {
-            //7.1播放上一首音乐
-            player.playMusic(player.preIndex(),player.musicList[player.preIndex()]);
-            //7.2切换音乐表单样式
-            //waiting for write;
+            let $item = $('.music-list-content');
+            //恢复下一首音乐表单样式
+            nextMusic(player.preIndex());
+            $item.eq(player.nextIndex()).removeClass('music-play');
         });
 
         //    8.监听播放器中*下一首*按钮的点击事件
         $('.next').click(function () {
-            //8.1播放下一首音乐
-            player.playMusic(player.nextIndex(),player.musicList[player.nextIndex()]);
-            //8.2切换音乐表单样式
-            //waiting for write;
+            let $item = $('.music-list-content');
+            //恢复上一首音乐表单样式
+            nextMusic(player.nextIndex());
+            $item.eq(player.preIndex()).removeClass('music-play');
         });
+    }
+
+    /**
+     * 上一首/下一首公用部分
+     */
+    function nextMusic(index) {
+        let $item = $('.music-list-content');
+        //1.播放上/下一首
+        player.playMusic(index, player.musicList[index]);
+        //2.切换音乐表单样式
+        $item.eq(player.playingIndex).addClass('music-play');
+        //3.初始化页面信息
+        initMusicInfo($item.get(player.playingIndex).music);
+        //4.切换成暂停按钮
+        $('.control-btn').addClass('playing');
     }
 
     /**
@@ -201,8 +235,8 @@ $(function () {
         let $playerSinger = $playerInfo.eq(1);
         let $playerCurrent = $('.current');
 
-        $musicImg.attr('src',music.cover);
-        $musicBg.css('background',`url("${music.cover}") no-repeat center center`);
+        $musicImg.attr('src', music.cover);
+        $musicBg.css('background', `url("${music.cover}") no-repeat center center`);
         $musicInfoName.text(music.name);
         $musicInfoSinger.text(music.singer);
         $musicInfoAlbum.text(music.album);
