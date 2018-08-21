@@ -608,8 +608,7 @@ footer .volume .progress{
     bottom: 0;
     right: 0;
     z-index: -2;
-    background: url("../source/告白气球.jpg") no-repeat center center;
-    background-size: cover;
+    background-size: cover !important;
     filter: blur(100px);
 }
 .mask{

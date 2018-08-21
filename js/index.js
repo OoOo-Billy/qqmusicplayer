@@ -29,7 +29,7 @@ $(function () {
                     $musicList.append($item);
                 });
                 //2.2初始化页面信息
-                // initMusicInfo(data[0]);
+                initMusicInfo(data[0]);
                 // initMusicLyric(data[0]);
             },
             error: function (e) {
@@ -55,8 +55,8 @@ $(function () {
             $(this).removeClass('music-hover');
         });
 
-//    2.监听复选框点击事件
-//    2.1标题栏复选框，点击全选
+        //    2.监听复选框点击事件
+        //    2.1标题栏复选框，点击全选
         $musicList.delegate('.music-list-header>.checkbox>span', 'click', function () {
             $(this).parent('.checkbox').toggleClass('checked');
             if ($(this).parent('.checkbox').hasClass('checked')) {
@@ -65,55 +65,56 @@ $(function () {
                 $('.checkbox').removeClass('checked');
             }
         });
-//    2.2其他复选框，点击选择
+        //    2.2其他复选框，点击选择
         $musicList.delegate('.music-list-content>.checkbox>span', 'click', function () {
             $(this).parent('.checkbox').toggleClass('checked');
             $('.music-list-header>.checkbox').removeClass('checked');
         });
 
-//    3.监听歌曲列表子菜单按钮事件
-//    3.1播放按钮事件
+        //    3.监听歌曲列表子菜单按钮事件
+        //    3.1播放按钮事件
         let $controlBtn = $('.control-btn');
         $musicList.delegate('.play', 'click', function () {
-            let farther = $(this).parents('.music-list-content');
-            //3.1.1按钮切换到暂停
-            farther.toggleClass('music-play');
-            farther.siblings(".music-play").removeClass('music-play');
-
-            //3.1.2播放器按钮同步切换到暂停
+            let $farther = $(this).parents('.music-list-content');
+            //3.1.1初始化全局音乐信息
+            initMusicInfo($farther.get(0).music);//歌曲信息
+            // initMusicLyric($farther.get(0).music);//歌词信息
+            //3.1.2按钮切换到暂停
+            $farther.toggleClass('music-play');
+            $farther.siblings(".music-play").removeClass('music-play');
+            //3.1.3播放器按钮同步切换到暂停
             $controlBtn.addClass('playing');
-
-            //    3.1.3播放器播放音乐
-            player.playMusic(farther.get(0).index, farther.get(0).music);
-
+            //3.1.4播放器播放音乐
+            player.playMusic($farther.get(0).index, $farther.get(0).music);
         });
-//    3.2暂停按钮事件
+        //    3.2暂停按钮事件
         $musicList.delegate('.stop', 'click', function () {
             //3.2.1按钮切换回播放
             $(this).parents('.music-list-content').removeClass('music-play');
             //3.2.2播放器按钮同步回播放
             $controlBtn.removeClass('playing');
-            //    3.2.3暂停播放
+            //3.2.3暂停播放
             player.audio.pause();
         });
 
-//    4.监听删除按钮点击事件
+        //    4.监听删除按钮点击事件
         $musicList.delegate('.del', 'click', function () {
             //4.1删除歌曲
             $(this).parents('.music-list-content').remove();
             //4.2更改剩余歌曲序号
         });
 
-//    5.监听播放器中*播放*按钮的点击事件
+        //    5.监听播放器中*播放*按钮的点击事件
         $('.play').click(function () {
-            //6.1暂停播放器;
+            //6.1播放器播放音乐;
             player.audio.play();
             //6.2切换按钮
             $controlBtn.addClass('playing');
             //6.3同步音乐列表中当前音乐的暂停按钮
             $('.music-list-content').eq(player.playingIndex).addClass('music-play');
         });
-//    6.监听播放器中*暂停*按钮的点击事件
+
+        //    6.监听播放器中*暂停*按钮的点击事件
         $('.stop').click(function () {
             //6.1暂停播放器;
             player.audio.pause();
@@ -123,14 +124,15 @@ $(function () {
             $('.music-list-content').eq(player.playingIndex).removeClass('music-play');
         });
 
-    //    7.监听播放器中*上一首*按钮的点击事件
+        //    7.监听播放器中*上一首*按钮的点击事件
         $('.pre').click(function () {
             //7.1播放上一首音乐
             player.playMusic(player.preIndex(),player.musicList[player.preIndex()]);
             //7.2切换音乐表单样式
             //waiting for write;
         });
-    //    8.监听播放器中*下一首*按钮的点击事件
+
+        //    8.监听播放器中*下一首*按钮的点击事件
         $('.next').click(function () {
             //8.1播放下一首音乐
             player.playMusic(player.nextIndex(),player.musicList[player.nextIndex()]);
@@ -183,10 +185,36 @@ $(function () {
         $('.music-box').css('height', $height - 250);
     }
 
+    /**
+     * 初始化全局歌曲信息
+     * @param music
+     */
+    function initMusicInfo(music) {
+        let $musicImg = $('.music-img img');
+        let $musicBg = $('.mask_bg');
+        let $musicInfo = $('.music-info p a');
+        let $musicInfoName = $musicInfo.eq(0);
+        let $musicInfoSinger = $musicInfo.eq(1);
+        let $musicInfoAlbum = $musicInfo.eq(2);
+        let $playerInfo = $('.info a');
+        let $playerName = $playerInfo.eq(0);
+        let $playerSinger = $playerInfo.eq(1);
+        let $playerCurrent = $('.current');
 
-    function initMusicInfo(ele) {
-
+        $musicImg.attr('src',music.cover);
+        $musicBg.css('background',`url("${music.cover}") no-repeat center center`);
+        $musicInfoName.text(music.name);
+        $musicInfoSinger.text(music.singer);
+        $musicInfoAlbum.text(music.album);
+        $playerName.text(music.name);
+        $playerSinger.text(music.singer);
+        $playerCurrent.text(music.time);
     }
+
+    /*function initMusicLyric(music){
+        let $lyric =$('.lyric-box');
+        let $item = $('');
+    }*/
 });
 
 
