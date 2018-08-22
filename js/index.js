@@ -3,6 +3,9 @@ $(function () {
 //    1.1全局变量
     let $audio = $('audio');
     let player = new Player($audio);
+    let progress;
+    let volumeProgress;
+    let lyric;
 //    1.2初始化滚动条
     $(".music-box").mCustomScrollbar();
 //    1.3初始化音乐列表高度
@@ -41,6 +44,11 @@ $(function () {
     //3.初始化事件监听
     initEvents();
 
+    //4.初始化进度条
+    initProgress();
+    function initProgress() {
+        
+    }
 
     /**
      * 初始化监听事件
@@ -145,23 +153,27 @@ $(function () {
 
         //    7.监听播放器中*上一首*按钮的点击事件
         $('.pre').click(function () {
-            let $item = $('.music-list-content');
             //恢复下一首音乐表单样式
             nextMusic(player.preIndex());
-            $item.eq(player.nextIndex()).removeClass('music-play');
+            $('.music-list-content').eq(player.nextIndex()).removeClass('music-play');
         });
 
         //    8.监听播放器中*下一首*按钮的点击事件
         $('.next').click(function () {
-            let $item = $('.music-list-content');
             //恢复上一首音乐表单样式
             nextMusic(player.nextIndex());
-            $item.eq(player.preIndex()).removeClass('music-play');
+            $('.music-list-content').eq(player.preIndex()).removeClass('music-play');
         });
+
+    //    9.监听进度条点击事件
+      /*  $('.progress').click(function () {
+
+        })*/
     }
 
     /**
      * 上一首/下一首公用部分
+     * @param index
      */
     function nextMusic(index) {
         let $item = $('.music-list-content');
