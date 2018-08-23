@@ -52,8 +52,46 @@
                 //2.删除的音乐为当前播放的音乐,播放索引不需要改变,但是,这时候已经触发了nextMusic行为,使播放索引已经+1,所以需要-1回到原来的值.
                 this.playingIndex -= 1;
             }
-        }
+        },
 
+        timeUpdate: function (callBack) {
+            let $this = this;
+            this.$audio.on('timeupdate',function () {
+                let currentTime = $this.audio.currentTime;
+                let duration = $this.audio.duration;
+                let timeStr = $this.formatDate(currentTime);
+                callBack(currentTime,duration,timeStr);
+            })
+        },
+
+        formatDate: function (currentTime) {
+            //1.处理当前时间
+            let startMin = parseInt(currentTime / 60);
+            let startSec = parseInt(currentTime % 60);
+            if (startMin < 10){
+                startMin = '0' + startMin;
+            }
+            if (startSec < 10){
+                startSec = '0' + startSec;
+            }
+            /*//2.处理总时长
+            let endMin = parseInt(duration / 60);
+            let endSec = parseInt(duration % 60);
+            if (endMin < 10){
+                endMin = '0' + endMin;
+            }
+            if (endSec < 10){
+                endSec = '0' + endSec;
+            }*/
+            //返回拼接后的时间
+            return `${startMin}:${startSec}`;
+        },
+
+        musicSeekTo: function (value) {
+            if (isNaN(value)) return;
+            //******************************debug*********************************//
+            this.audio.currentTime = this.audio.duration * value;//duration写成了currentTime!!!!debug了一晚上！！！！！
+        }
     };
     Player.prototype._init.prototype = Player.prototype;
     //使之变成全局变量,全局可调用

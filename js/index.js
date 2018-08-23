@@ -44,31 +44,6 @@ $(function () {
     //3.初始化事件监听
     initEvents();
 
-    //4.初始化进度条
-    initProgress();
-    function initProgress() {
-        //4.1初始化播放器进度条
-        let $progressBar = $('.player .progress');
-        let $progressLine = $('.player .progress-bg');
-        let $progressDot = $('.player .progress-bar');
-        progress = new Progress($progressBar,$progressLine,$progressDot);
-        progress.progressMove(function (value) {
-            console.log(value);
-            // player.musicSeekTo(value);
-        });
-
-        //4.2初始化音量进度条
-        let $musicProgressBar = $('.volume .progress');
-        let $musicProgressLine = $('.volume .progress-bg');
-        let $musicProgressDot = $('.volume .progress-bar');
-        volumeProgress = new Progress($musicProgressBar,$musicProgressLine,$musicProgressDot);
-        volumeProgress.progressMove(function (value) {
-            console.log(value);
-            // player.volumeSeekTo(value);
-        });
-
-    }
-
     /**
      * 初始化监听事件
      */
@@ -184,10 +159,45 @@ $(function () {
             $('.music-list-content').eq(player.preIndex()).removeClass('music-play');
         });
 
-    //    9.监听进度条点击事件
-      /*  $('.progress').click(function () {
+        //    9.监听播放的进度
+        player.timeUpdate(function (currentTime,duration,timeStr) {
+            //9.1同步播放器时间
+            $('.now').text(timeStr);
+            //9.2同步进度条
+            let value = currentTime / duration * 100;
+            progress.setProgress(value);
 
-        })*/
+            //9.3实现歌词同步
+
+            //9.4实现歌词滚动
+        });
+    }
+
+    //4.初始化进度条
+    initProgress();
+
+    /**
+     * 初始化进度条
+     */
+    function initProgress() {
+        //4.1初始化播放器进度条
+        let $progressBar = $('.player .progress');
+        let $progressLine = $('.player .progress-bg');
+        let $progressDot = $('.player .progress-bar');
+        progress = new Progress($progressBar,$progressLine,$progressDot);
+        progress.progressMove(function (value) {
+            player.musicSeekTo(value);
+        });
+
+        //4.2初始化音量进度条
+        let $musicProgressBar = $('.volume .progress');
+        let $musicProgressLine = $('.volume .progress-bg');
+        let $musicProgressDot = $('.volume .progress-bar');
+        volumeProgress = new Progress($musicProgressBar,$musicProgressLine,$musicProgressDot);
+        volumeProgress.progressMove(function (value) {
+            // player.volumeSeekTo(value);
+        });
+
     }
 
     /**

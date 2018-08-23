@@ -427,7 +427,7 @@ footer .center {
     justify-content: space-between;
 }
 footer .control-btn a {
-    margin: 0 20px;
+    margin: 0 40px 0 0;
 }
 
 footer .control-btn a:nth-of-type(1) {
@@ -471,9 +471,11 @@ footer .player .player-info {
 footer .player .player-info .time {
     color: rgba(225, 225, 225, .8);
 }
-
+footer .player{
+    width: 45%;
+}
 footer .progress {
-    width: 450px;/*后面要改变*/
+    width: 100%;
     height: 2px;
     background: rgba(255, 255, 255, .2);
     cursor: pointer;
@@ -481,7 +483,6 @@ footer .progress {
 }
 
 footer .progress .progress-bg {
-    /*width: 20%;*/
     height: 100%;
     background: rgba(255,255,255,.7);
     position: absolute;
@@ -598,6 +599,12 @@ footer .volume .progress{
     display: inline-block;
     width: 100px;
     vertical-align: 9px;
+}
+footer .volume .progress .progress-bg{
+    width: 100%;
+}
+footer .volume .progress .progress-bar{
+    left: 96px;
 }
 /*footer end**/
 
