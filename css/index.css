@@ -481,7 +481,7 @@ footer .progress {
 }
 
 footer .progress .progress-bg {
-    width: 20%;
+    /*width: 20%;*/
     height: 100%;
     background: rgba(255,255,255,.7);
     position: absolute;
@@ -592,6 +592,7 @@ footer .volume .volume-icon{
     height: 21px;
     background-position: 0 -144px;
     margin-right: 10px;
+    cursor: pointer;
 }
 footer .volume .progress{
     display: inline-block;

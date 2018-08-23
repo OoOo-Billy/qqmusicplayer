@@ -47,7 +47,26 @@ $(function () {
     //4.初始化进度条
     initProgress();
     function initProgress() {
-        
+        //4.1初始化播放器进度条
+        let $progressBar = $('.player .progress');
+        let $progressLine = $('.player .progress-bg');
+        let $progressDot = $('.player .progress-bar');
+        progress = new Progress($progressBar,$progressLine,$progressDot);
+        progress.progressMove(function (value) {
+            console.log(value);
+            // player.musicSeekTo(value);
+        });
+
+        //4.2初始化音量进度条
+        let $musicProgressBar = $('.volume .progress');
+        let $musicProgressLine = $('.volume .progress-bg');
+        let $musicProgressDot = $('.volume .progress-bar');
+        volumeProgress = new Progress($musicProgressBar,$musicProgressLine,$musicProgressDot);
+        volumeProgress.progressMove(function (value) {
+            console.log(value);
+            // player.volumeSeekTo(value);
+        });
+
     }
 
     /**
