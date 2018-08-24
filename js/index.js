@@ -160,6 +160,8 @@ $(function () {
         });
 
         //    9.监听播放的进度
+        let lyricIndex;
+        let $lyricItem;
         player.timeUpdate(function (currentTime,duration,timeStr) {
             //9.1同步播放器时间
             $('.now').text(timeStr);
@@ -167,10 +169,31 @@ $(function () {
             let value = currentTime / duration * 100;
             progress.setProgress(value);
 
-            //9.3实现歌词同步
-
+            //9.3实现歌词同步:实现方法——把currentTime传给Lyric，让它与timeArray匹配，一但匹配成功，则返回一个索引value，播放器拿到索引，让相应的歌词滚动高亮
+            lyricIndex = lyric.currentIndex(currentTime);
+            $lyricItem = $('.lyric-box li').eq(lyricIndex);
+            $lyricItem.addClass('cur');
+            $lyricItem.siblings('.cur').removeClass('cur');
             //9.4实现歌词滚动
+            if (lyricIndex <= 2) return;
+            $('.lyric-box ul').css('marginTop',(-lyricIndex + 2) * 29.5);
         });
+
+        //10.监听歌词拖拽:暂时无法使用
+        /*$('.lyric-box').mousedown(function (event) {
+            let $box = $('.lyric-box ul');
+            let begin = event.clientY ? event.clientY : event.pageY;
+            let target,dis;
+            let lyricTop = parseInt($box.css('marginTop'));
+            $(document).mousemove(function (event) {
+                target = event.clientY ? event.clientY : event.pageY;
+                dis = target - begin;
+                $box.css({
+                    marginTop:(lyricTop + dis),
+                    transition: 'all 0.2s',
+                });
+            })
+        })*/
     }
 
     //4.初始化进度条
@@ -295,15 +318,18 @@ $(function () {
         //1.将当前播放歌曲的歌词文件路径传入lyric对象
         lyric.path = music.link_lrc;
         //2.清空当前网页歌词
-        let $lyricBox = $('.lyric-box');
-        $lyricBox.text('');
+        let $lyricBox = $('.lyric-box ul');
+        $lyricBox.html('');
+        lyric.index = -1;
         //3.重新添加歌词
         lyric.loadLyric(function () {
             $.each(lyric.lyricArray,function (index,ele) {
-                let $item = $(`<p>${ele}</p>`);
+                let $item = $(`<li>${ele}</li>`);
                 $lyricBox.append($item);
             })
         });
+        //4.恢复歌词滚动
+        $lyricBox.css('marginTop',0);
     }
 });
 
