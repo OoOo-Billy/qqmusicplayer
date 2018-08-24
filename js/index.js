@@ -5,7 +5,7 @@ $(function () {
     let player = new Player($audio);
     let progress;
     let volumeProgress;
-    let lyric;
+    let lyric = new Lyric;
 //    1.2初始化滚动条
     $(".music-box").mCustomScrollbar();
 //    1.3初始化音乐列表高度
@@ -33,7 +33,7 @@ $(function () {
                 });
                 //2.2初始化页面信息
                 initMusicInfo(data[0]);
-                // initMusicLyric(data[0]);
+                initMusicLyric(data[0]);
             },
             error: function (e) {
                 console.log(e);
@@ -80,7 +80,7 @@ $(function () {
             let $farther = $(this).parents('.music-list-content');
             //3.1.1初始化全局音乐信息
             initMusicInfo($farther.get(0).music);//歌曲信息
-            // initMusicLyric($farther.get(0).music);//歌词信息
+            initMusicLyric($farther.get(0).music);//歌词信息
             //3.1.2按钮切换到暂停
             $farther.toggleClass('music-play');
             $farther.siblings(".music-play").removeClass('music-play');
@@ -195,7 +195,7 @@ $(function () {
         let $musicProgressDot = $('.volume .progress-bar');
         volumeProgress = new Progress($musicProgressBar,$musicProgressLine,$musicProgressDot);
         volumeProgress.progressMove(function (value) {
-            // player.volumeSeekTo(value);
+            player.volumeSeekTo(value);
         });
 
     }
@@ -212,6 +212,7 @@ $(function () {
         $item.eq(player.playingIndex).addClass('music-play');
         //3.初始化页面信息
         initMusicInfo($item.get(player.playingIndex).music);
+        initMusicLyric($item.get(player.playingIndex).music);
         //4.切换成暂停按钮
         $('.control-btn').addClass('playing');
     }
@@ -286,10 +287,24 @@ $(function () {
         $playerCurrent.text(music.time);
     }
 
-    /*function initMusicLyric(music){
-        let $lyric =$('.lyric-box');
-        let $item = $('');
-    }*/
+    /**
+     * 初始化歌词信息
+     * @param music
+     */
+    function initMusicLyric(music){
+        //1.将当前播放歌曲的歌词文件路径传入lyric对象
+        lyric.path = music.link_lrc;
+        //2.清空当前网页歌词
+        let $lyricBox = $('.lyric-box');
+        $lyricBox.text('');
+        //3.重新添加歌词
+        lyric.loadLyric(function () {
+            $.each(lyric.lyricArray,function (index,ele) {
+                let $item = $(`<p>${ele}</p>`);
+                $lyricBox.append($item);
+            })
+        });
+    }
 });
 
 

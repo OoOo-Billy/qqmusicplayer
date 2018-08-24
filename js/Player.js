@@ -91,6 +91,12 @@
             if (isNaN(value)) return;
             //******************************debug*********************************//
             this.audio.currentTime = this.audio.duration * value;//duration写成了currentTime!!!!debug了一晚上！！！！！
+        },
+
+        volumeSeekTo: function (value) {
+            if (isNaN(value)) return;
+            if (value < 0 || value > 1) return;
+            this.audio.volume = value;
         }
     };
     Player.prototype._init.prototype = Player.prototype;

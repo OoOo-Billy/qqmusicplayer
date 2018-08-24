@@ -49,6 +49,13 @@
                 mouseLeft = event.clientX ? event.clientX : event.pageX;
                 //计算进度
                 let num = mouseLeft - progressLeft;
+                //判断num的下限/上限
+                if (num < 0){
+                    num = 0
+                } else if (num > barWidth) {
+                    num = barWidth;
+                }
+                console.log(num);
                 //设置进度线宽度
                 $this.$line.width(num);
                 //设置进度点左边距
@@ -82,9 +89,9 @@
                 mouseLeft = event.clientX ? event.clientX : event.pageX;
                 let value = (mouseLeft - progressLeft) / barWidth;
                 //******************************debug******************************//
-                if ($this.$bar.parent().hasClass('volume') !== true && value <= 1 && value >= 0){//最关键的一步判断条件
+                // if ($this.$bar.parent().hasClass('volume') !== true && value <= 1 && value >= 0){//最关键的一步判断条件
                     callBack(value);
-                }
+                // }
             })
         },
 
