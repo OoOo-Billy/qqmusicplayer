@@ -176,7 +176,7 @@ $(function () {
             $lyricItem.siblings('.cur').removeClass('cur');
             //9.4实现歌词滚动
             if (lyricIndex <= 2) return;
-            $('.lyric-box ul').css('marginTop',(-lyricIndex + 2) * 29.5);
+            $('.lyric-box ul').css('marginTop',(-lyricIndex + 1) * 28);
         });
 
         //10.监听歌词拖拽:暂时无法使用
