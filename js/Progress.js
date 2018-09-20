@@ -74,24 +74,25 @@
                         $this.$dot.css('left',num - 4);//微调位置
                     }
                 });
-            });
 
-            //抬起鼠标
-            $(document).mouseup(function (event) {//此处有BUG，全局生效,且一次返回两个value值分别给musicProgress和volumeProgress,
-                //关闭移动事件
-                $(document).off('mousemove');
-                //恢复字段选择功能
-                document.onselectstart = function () {return true;};
-                //取消移动
-                $this.isMove = false;
-                //计算进度条比例
-                mouseLeft = event.clientX ? event.clientX : event.pageX;
-                let value = (mouseLeft - progressLeft) / barWidth;
-                //******************************debug******************************//
-                if ($this.$bar.parent().hasClass('volume') !== true && value <= 1 && value >= 0){//最关键的一步判断条件
+                //抬起鼠标
+                $(document).mouseup(function (event) {
+                    //此处有BUG，全局生效,且一次返回两个value值分别给musicProgress和volumeProgress,
+                    //关闭移动事件
+                    $(document).off('mousemove');
+                    //恢复字段选择功能
+                    document.onselectstart = function () {return true;};
+                    //取消移动
+                    $this.isMove = false;
+                    //计算进度条比例
+                    mouseLeft = event.clientX ? event.clientX : event.pageX;
+                    let value = (mouseLeft - progressLeft) / barWidth;
                     callBack(value);
-                }
-            })
+                    //******************************debug******************************//
+                    //解决BUG：第一次拖动之后，如果不取消mouseup，会导致点击进度条上方任意位置都会改变进度条位置.同时可以解决点击歌曲进度条后再点击音量或者先点击后者再点击前者产生的回调干扰。
+                    $(document).off();
+                })
+            });
         },
 
         setProgress: function (value) {

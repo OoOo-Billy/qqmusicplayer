@@ -90,12 +90,17 @@
         musicSeekTo: function (value) {
             if (isNaN(value)) return;
             //******************************debug*********************************//
-            this.audio.currentTime = this.audio.duration * value;//duration写成了currentTime!!!!debug了一晚上！！！！！
+            this.audio.currentTime = this.audio.duration * value;
+            //duration注意不要写成currentTime
         },
 
         volumeSeekTo: function (value) {
             if (isNaN(value)) return;
-            if (value < 0 || value > 1) return;
+            if (value < 0 ) {
+                value = 0;
+            }else if(value > 1){
+                value = 1;
+            }
             this.audio.volume = value;
         }
     };
