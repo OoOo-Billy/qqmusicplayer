@@ -178,6 +178,7 @@ $(function () {
             if (lyricIndex <= 2) return;
             $('.lyric-box ul').css('marginTop',(-lyricIndex + 1) * 28);
         });
+        //此处有小BUG：英文歌词和中文歌词所占行高不同，需要固定歌词行高，另外：快进歌词滚动慢，且歌词无法倒退。
 
         //10.监听歌词拖拽:暂时无法使用
         /*$('.lyric-box').mousedown(function (event) {
