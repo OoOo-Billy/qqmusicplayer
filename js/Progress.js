@@ -49,6 +49,8 @@
                 mouseLeft = event.clientX ? event.clientX : event.pageX;
                 //计算进度
                 let num = mouseLeft - progressLeft;
+                //BUG:改变窗口大小后，progressLeft不变，但mouseLeft已经根据新窗口大小发生变化，导致进度条点击发生错位
+
                 //判断num的下限/上限
                 if (num < 0){
                     num = 0
