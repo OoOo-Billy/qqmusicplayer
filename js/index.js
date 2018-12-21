@@ -6,10 +6,13 @@ $(function () {
     let progress;
     let volumeProgress;
     let lyric = new Lyric;
+    let $height;
 //    1.2初始化滚动条
     $(".music-box").mCustomScrollbar();
 //    1.3初始化音乐列表高度
     initMusicBox();
+//    1.4监听窗口变化改变音乐列表的高度
+    changeMusicBox();
 
 
 //    2.动态添加歌曲列表
@@ -281,8 +284,18 @@ $(function () {
      * 初始化音乐列表盒子的高度
      */
     function initMusicBox() {
-        let $height = $(window).height();
-        $('.music-box').css('height', $height - 250);
+        $height = $(window).height();
+        $('.music-box').css('height', $height - 225);
+    }
+
+    /**
+     * 监听窗口变化改变音乐列表盒子的高度
+     */
+    function changeMusicBox() {
+        $(window).resize(function () {
+            $height = $(this).height();
+            $('.music-box').css('height', $height - 225);
+        });
     }
 
     /**
